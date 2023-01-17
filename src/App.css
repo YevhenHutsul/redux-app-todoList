@@ -1,0 +1,59 @@
+.App {
+  text-align: center;
+  display: flex;
+}
+
+#root{
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+}
+.max-size{
+    max-width: 15rem;
+}
+.list-group-item{
+    align-items: center;
+    display: flex;
+    max-width: 15rem;
+    
+}
+.task-id{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin: 0px 10px 0px 0px;
+    background-color: rgb(213, 213, 213);
+}
+
+.task-text{
+    overflow: hidden;
+    word-wrap: break-word;
+    flex: 1 1;
+    margin-left: 1rem;
+
+}
+
+.task-button{
+    max-height: 2rem;
+    min-height: 2rem;
+    width: 2rem;
+    padding-bottom: 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+
+    border: none;
+    border-radius: 10px;
+    color:white;
+
+    transition: 0.1s all;
+
+}
+
+.task-button:hover{
+    transition: 0.1s all;
+    background-color: rgb(156, 31, 31);
+}
