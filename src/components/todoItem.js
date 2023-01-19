@@ -1,20 +1,20 @@
 import { useDispatch } from "react-redux";
-import { removeTask,taskToggleComplited } from "../store/sliceUser";
+import { todoDelete, toggleStatus } from "../store/sliceUser";
 
-export const TodoItem = ({ idTask, isComplited, task }) => {
+export const TodoItem = ({ id, completed, title }) => {
     const dispatch = useDispatch();
     return (
         <li className='list-group-item'>
             <input
                 type='checkbox'
-                checked={isComplited}
-                onChange={() => dispatch(taskToggleComplited({idTask}))} 
-                />
-            <span className='task-text'>{task}</span>
+                checked={completed}
+                onChange={() => dispatch(toggleStatus(id))}
+            />
+            <span className='task-text'>{title}</span>
             <button
                 className='task-button'
-                onClick={() => dispatch(removeTask({idTask}))}
-                >
+                onClick={() => dispatch(todoDelete(id))}
+            >
                 <span
                     className='button-text'>
                     &times;</span>

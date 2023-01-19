@@ -1,37 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import  TodoList  from './components/todoList'
 import { InputField } from './components/inputField';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
-import { addTodo } from './store/sliceUser';
+import { addNewTodo, fetchTodos } from './store/sliceUser';
 
 const App = () => {
     const [inputValue, setInputValue] = useState('');
+    const {status, error} = useSelector(state => state.todo);
 
     
     const dispatch = useDispatch();
     const addTask = () => {
-        dispatch(addTodo(createTask(inputValue)))
+        dispatch(addNewTodo(inputValue))
         setInputValue('');
     }
 
-
-    const toggleComplited = (id) => {
-        //console.log(id);
-        //setDataTasks(
-        //    dataTasks.map(
-        //        task => {
-                    //if (task.idTask !== id) {
-                    //    return task
-                    //};
-                    //return {
-                    //    ...task,
-                    //    isComplited: !task.isComplited
-                    //};
-        //        }
-        //    )
-        //)
-    }
+    useEffect(() => {
+        dispatch(fetchTodos());
+    }, [dispatch])
     
 
     return (
@@ -41,6 +28,8 @@ const App = () => {
                 addTask = {addTask}
                 setInputValue = {setInputValue}
             />
+            {status === 'loading' && <h2>Loading...</h2>}
+            {error && <h2>An error occured: {error}</h2>}
             <TodoList />
         </div>
     );
@@ -49,9 +38,9 @@ const App = () => {
 //helpers
 function createTask(text) {
     return {
-        idTask: Math.floor(Math.random() * 10000),
-        task: text,
-        isComplited: false,
+        id: Math.floor(Math.random() * 10000),
+        title: text,
+        completed: false,
     }
 }
 export default App;
